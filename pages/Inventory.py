@@ -4,7 +4,7 @@ import plotly.express as px
 
 st.title("📦 Inventory Dashboard")
 
-df = pd.read_csv("online_retail_cleaned-1.csv")
+df = pd.read_csv("online_retail_cleaned_small.csv")
 
 inventory = (
     df.groupby("Description")["Quantity"]
