@@ -5,6 +5,8 @@ import plotly.express as px
 st.title("👥 Customer Analytics")
 
 df = pd.read_csv("online_retail_cleaned_small1.csv")
+st.write("Rows:", len(df))
+st.write(df.head())
 
 df["Sales"] = df["Quantity"] * df["UnitPrice"]
 
