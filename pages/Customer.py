@@ -10,49 +10,50 @@ st.write(df.head())
 
 df["Sales"] = df["Quantity"] * df["UnitPrice"]
 
-customer_sales = (
-    df.groupby("CustomerID")["Sales"]
-    .sum()
-    .sort_values(ascending=False)
-    .head(10)
-)
-import plotly.express as px
+df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"])
 
-fig = px.scatter(
-    customer_ci,
-    x="CustomerID",
-    y="Customer_Index",
-    color="Customer_Segment",   # Optional
-    size="Total_Sales",         # Optional
-    hover_data=["Customer_Name"],
-    title="Customer CI Dashboard"
-)
+snapshot_date = df["InvoiceDate"].max() + pd.Timedelta(days=1)
 
-fig.update_traces(
-    marker=dict(size=10)
-)
+rfm = df.groupby("CustomerID").agg({
+    "InvoiceDate": lambda x: (snapshot_date - x.max()).days,
+    "InvoiceNo": "nunique",
+    "Sales": "sum"
+}).reset_index()
 
-fig.update_layout(
-    xaxis_title="Customer ID",
-    yaxis_title="Customer Index (CI)",
-    template="plotly_white"
-)
-
-st.plotly_chart(fig, use_container_width=True)
+rfm.columns = ["CustomerID", "Recency", "Frequency", "Monetary"]
 # KPI Cards
 col1, col2 = st.columns(2)
 
 col1.metric("Total Customers", df["CustomerID"].nunique())
 col2.metric("Countries", df["Country"].nunique())
-
-# Customer Distribution by Country
-top_countries = df.groupby('Country')['CustomerID'].nunique().sort_values(ascending=False).head(10)
-
-fig = px.bar(
-    x=top_countries.index,
-    y=top_countries.values,
-    labels={'x':'Country','y':'Customers'},
-    title='Top 10 Countries by Customers'
+fig = px.scatter(
+    rfm,
+    x="Frequency",
+    y="Monetary",
+    size="Monetary",
+    color="Recency",
+    hover_data=["CustomerID"],
+    title="RFM Customer Analysis"
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
+st.subheader("RFM Customer Table")
+st.dataframe(rfm)
+
+# Customer Distribution by Country
+
+fig = px.scatter(
+    rfm,
+    x="Frequency",
+    y="Monetary",
+    size="Monetary",
+    color="Recency",
+    hover_data=["CustomerID"],
+    title="RFM Customer Analysis"
+)
+
+st.plotly_chart(fig, use_container_width=True)
+
+st.subheader("RFM Customer Table")
+st.dataframe(rfm)
