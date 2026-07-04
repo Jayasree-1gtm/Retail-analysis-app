@@ -11,6 +11,18 @@ st.set_page_config(
 st.sidebar.title("📊 RetailPulse")
 st.sidebar.markdown("### Business Intelligence Suite")
 st.sidebar.markdown("---")
+with st.expander("📖 About Project"):
+    st.write("""
+    Retail Analytics Dashboard developed using
+    Python, Pandas, Plotly and Streamlit.
+
+    Features:
+    • Customer Segmentation
+    • Inventory Analysis
+    • Sales Forecasting
+    • Demand Forecasting
+    • Customer Churn Prediction
+    """)
 st.sidebar.markdown("---")
 st.sidebar.success("🚀 Retail Analytics Dashboard")
 st.sidebar.info(
