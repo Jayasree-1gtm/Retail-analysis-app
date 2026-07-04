@@ -11,7 +11,19 @@ st.set_page_config(
 st.sidebar.title("📊 RetailPulse")
 st.sidebar.markdown("### Business Intelligence Suite")
 st.sidebar.markdown("---")
+st.sidebar.markdown("---")
+st.sidebar.info(
+"""
+Version 1.0
 
+Modules:
+• Customer
+• Inventory
+• Sales Forecasting
+• Demand Forecasting
+• Churn Prediction
+"""
+)
 df = pd.read_csv("online_retail_cleaned-1.csv")
 
 df["Sales"] = df["Quantity"] * df["UnitPrice"]
@@ -20,8 +32,27 @@ st.title("📊 RetailPulse Analytics Dashboard")
 st.caption("Business Intelligence Platform for Retail Performance Monitoring")
 
 st.markdown("""
-Retail Sales Analytics and Business Intelligence platform for monitoring sales performance, customer insights, inventory analysis, and forecasting.
+### Welcome to RetailPulse Analytics
+
+This dashboard helps analyze:
+- Customer Behavior
+- Inventory Performance
+- Sales Forecasting
+- Demand Forecasting
+- Customer Churn Prediction
+
+Use the sidebar to navigate through modules.
 """)
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.success("👥 Customer Analytics")
+
+with col2:
+    st.info("📦 Inventory Insights")
+
+with col3:
+    st.warning("📈 Forecasting Models")
 st .subheader("Key performance Indicators")
 
 col1, col2, col3, col4 = st.columns(4)
@@ -118,6 +149,15 @@ fig = px.bar(
 st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
-st.caption(
-    "RetailPulse Analytics Dashboard | Built with Python, Streamlit, Pandas and Plotly"
+st.markdown("---")
+
+st.markdown(
+"""
+<center>
+RetailPulse Analytics Dashboard<br>
+MBA Internship Project 2026<br>
+Developed using Python, Streamlit & Plotly
+</center>
+""",
+unsafe_allow_html=True
 )
