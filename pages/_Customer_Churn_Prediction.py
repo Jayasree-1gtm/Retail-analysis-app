@@ -6,6 +6,7 @@ st.title("⚠️ Customer Churn Prediction")
 
 # Load data
 df = pd.read_csv("online_retail_cleaned_small.csv")
+df["Sales"] = df["Quantity"] * df["UnitPrice"]
 
 # Calculate customer sales
 customer_sales = df.groupby("CustomerID")["Sales"].sum().reset_index()
