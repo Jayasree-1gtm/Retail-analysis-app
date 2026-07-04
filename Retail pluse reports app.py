@@ -12,6 +12,7 @@ st.sidebar.title("📊 RetailPulse")
 st.sidebar.markdown("### Business Intelligence Suite")
 st.sidebar.markdown("---")
 st.sidebar.markdown("---")
+st.sidebar.success("🚀 Retail Analytics Dashboard")
 st.sidebar.info(
 """
 Version 1.0
@@ -82,6 +83,10 @@ fig = px.line(
     x="InvoiceDate",
     y="Sales",
     title="Monthly Sales Trend"
+)
+fig.update_layout(
+    template="plotly_white",
+    height=500
 )
 
 st.plotly_chart(fig, use_container_width=True)
