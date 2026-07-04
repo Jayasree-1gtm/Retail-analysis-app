@@ -16,15 +16,13 @@ customer_sales = (
     .sort_values(ascending=False)
     .head(10)
 )
-fig = px.scatter(
-    rfm,
-    x="Frequency",
-    y="Monetary",
-    color="Segment",
-    size="Monetary",
-    hover_data=["Recency"],
-    title="Customer Segmentation (RFM Analysis)"
+fig = px.bar(
+    x=customer_sales.values,
+    y=customer_sales.index.astype(str),
+    orientation="h",
+    title="Top 10 Customers by Sales"
 )
+
 
 st.plotly_chart(fig, use_container_width=True)
 
