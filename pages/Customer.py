@@ -41,19 +41,4 @@ st.plotly_chart(fig, use_container_width=True)
 st.subheader("RFM Customer Table")
 st.dataframe(rfm)
 
-# Customer Distribution by Country
 
-fig = px.scatter(
-    rfm,
-    x="Frequency",
-    y="Monetary",
-    size="Monetary",
-    color="Recency",
-    hover_data=["CustomerID"],
-    title="RFM Customer Analysis"
-)
-
-st.plotly_chart(fig, use_container_width=True)
-
-st.subheader("RFM Customer Table")
-st.dataframe(rfm)
