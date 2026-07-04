@@ -22,10 +22,20 @@ fig = px.bar(
 
 st.plotly_chart(fig, use_container_width=True)
 
-fig = px.histogram(
-    df,
-    x="Quantity",
-    title="Inventory Distribution"
+st.subheader("Inventory Distribution")
+
+inventory_dist = (
+    df.groupby("Description")["Quantity"]
+      .sum()
+      .sort_values(ascending=False)
+      .head(10)
+)
+
+fig = px.bar(
+    x=inventory_dist.index,
+    y=inventory_dist.values,
+    labels={"x": "Product", "y": "Quantity"},
+    title="Top 10 Products Inventory Distribution"
 )
 
 st.plotly_chart(fig, use_container_width=True)
