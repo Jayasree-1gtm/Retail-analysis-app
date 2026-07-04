@@ -12,7 +12,7 @@ st.sidebar.title("📊 RetailPulse")
 st.sidebar.markdown("### Business Intelligence Suite")
 st.sidebar.markdown("---")
 
-df = pd.read_csv("online_retail_cleaned-1.csv")
+df = pd.read_csv("online_retail_cleaned-sm all.csv")
 
 df["Sales"] = df["Quantity"] * df["UnitPrice"]
 
