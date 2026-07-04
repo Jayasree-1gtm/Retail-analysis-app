@@ -5,7 +5,7 @@ import plotly.express as px
 st.title("📈 Sales Forecast")
 st.write("Page loaded successfully")
 
-df = pd.read_csv("online_retail_cleaned-1.csv")
+df = pd.read_csv("online_retail_cleaned_small.csv")
 
 st.write(df.head())
 st.write(df.columns)
