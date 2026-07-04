@@ -9,10 +9,18 @@ df = pd.read_csv("online_retail_cleaned_small.csv")
 
 # Date conversion
 df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"])
+products = sorted(df["Description"].dropna().unique())
+
+selected_product = st.selectbox(
+    "Select Product",
+    products
+)
+
+product_df = df[df["Description"] == selected_product]
 
 # Monthly demand
 monthly_demand = (
-    df.groupby(df["InvoiceDate"].dt.to_period("M"))["Quantity"]
+    product_df.groupby(product_df["InvoiceDate"].dt.to_period("M"))["Quantity"]
     .sum()
     .reset_index()
 )
@@ -33,7 +41,7 @@ fig = px.line(
     combined,
     x="InvoiceDate",
     y="Quantity",
-    title="Monthly Demand Forecast"
+    title=f"Demand Forecast - {selected_product}"
 )
 
 st.plotly_chart(fig, use_container_width=True)
