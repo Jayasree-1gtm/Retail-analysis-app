@@ -16,13 +16,12 @@ customer_sales = (
     .sort_values(ascending=False)
     .head(10)
 )
-fig = px.bar(
-    x=customer_sales.values,
-    y=customer_sales.index.astype(str),
-    orientation="h",
-    title="Top 10 Customers by Sales"
+fig = px.scatter(
+    customer_ci,
+    x="CustomerID",
+    y="Customer_Index",
+    title="Customer CI Dashboard"
 )
-
 
 st.plotly_chart(fig, use_container_width=True)
 
