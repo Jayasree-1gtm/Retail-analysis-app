@@ -7,8 +7,11 @@ st.write("Page loaded successfully")
 
 df = pd.read_csv("online_retail_cleaned_small.csv")
 
-st.subheader("Dataset Preview")
-st.dataframe(df.head(10))
+st.subheader("Invoice Details")
+st.dataframe(
+    df[['InvoiceNo','StockCode','Description',
+        'Quantity','InvoiceDate']].head(20)
+)
 df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"])
 df["Sales"] = df["Quantity"] * df["UnitPrice"]
 
