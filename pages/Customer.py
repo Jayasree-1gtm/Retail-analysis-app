@@ -16,15 +16,29 @@ customer_sales = (
     .sort_values(ascending=False)
     .head(10)
 )
+import plotly.express as px
+
 fig = px.scatter(
     customer_ci,
     x="CustomerID",
     y="Customer_Index",
+    color="Customer_Segment",   # Optional
+    size="Total_Sales",         # Optional
+    hover_data=["Customer_Name"],
     title="Customer CI Dashboard"
 )
 
-st.plotly_chart(fig, use_container_width=True)
+fig.update_traces(
+    marker=dict(size=10)
+)
 
+fig.update_layout(
+    xaxis_title="Customer ID",
+    yaxis_title="Customer Index (CI)",
+    template="plotly_white"
+)
+
+st.plotly_chart(fig, use_container_width=True)
 # KPI Cards
 col1, col2 = st.columns(2)
 
