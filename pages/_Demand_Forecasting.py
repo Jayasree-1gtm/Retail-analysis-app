@@ -5,7 +5,7 @@ import plotly.express as px
 st.title("📈 Demand Forecasting")
 
 # Load data
-df = pd.read_csv("online_retail_cleaned-1.csv")
+df = pd.read_csv("online_retail_cleaned_small.csv")
 
 # Date conversion
 df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"])
